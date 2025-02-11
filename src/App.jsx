@@ -1,33 +1,24 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-
-const Card = ({ title }) => {
-  const [count, setCount] = useState(0);
-  const [hasLiked, setHasLiked] = useState(false);
-
-  useEffect(() => {
-    console.log(`${title} has been liked: ${hasLiked}`);
-  }, [hasLiked]);
-
-  return (
-    <div className='card' onClick={() => setCount((prevState)=>prevState + 1)}>
-      <h2>{title} <br /> {count}</h2>
-
-      <button onClick={() => setHasLiked((prevState)=>!prevState)}>
-        {hasLiked ? "❤️" : "🤍"}
-      </button>
-    </div>
-  )
-}
+import Search from "./components/Search.jsx";
+import {useState} from "react";
 
 const App = () => {
-  return (
-    <div className='card-container'>
-      <Card title="Star Wars" />
-      <Card title="Avatar" />
-      <Card title="The Lion King" />
-    </div>
-  )
+    const [searchTerm, setSearchTerm] = useState('');
+
+    return (
+        <main>
+            <div className="pattern" />
+
+            <div className="wrapper">
+                <header>
+                    <img src="./hero.png" alt="Hero Banner"/>
+                    <h1>Encontre <span className="text-gradient">filmes</span> que você vai curtir</h1>
+                </header>
+
+                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <h1 className="text-white">{searchTerm}</h1>
+            </div>
+        </main>
+    )
 }
 
 export default App
